@@ -37,6 +37,5 @@ public class CheckoutApplication {
 
         CheckoutService basicCheckout = new BasicCheckout();
 
-        String output = basicCheckout.printCheckout(itemList);
     }
 }

@@ -8,12 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 
 public class OfferTest {
 
-    public static final String PRICE_FORMAT = "#.00";
-    public static final DecimalFormat df = new DecimalFormat(PRICE_FORMAT);
     public static final ObjectMapper mapper = new ObjectMapper();
 
     @Before
@@ -30,7 +27,7 @@ public class OfferTest {
 
     @Test
     public void createNewDiscountOfferFromJson_Test() throws IOException {
-        String discountItemJson = "{\"discountPercentage\":50,\"offerType\":\"FIXED_DISCOUNT\"}";
+        String discountItemJson = "{ \"type\": \"FixedDiscount\", \"discountPercentage\": 50 }";
         FixedDiscount discount = mapper.readValue(discountItemJson, FixedDiscount.class);
 
         Assert.assertEquals(50, discount.getDiscountPercentage());

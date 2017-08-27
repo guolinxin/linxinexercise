@@ -6,6 +6,9 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.NoSuchFileException;
 
+/**
+ * Utility class to load resource file
+ */
 public class ResourceLoader {
     private String filePath;
 
