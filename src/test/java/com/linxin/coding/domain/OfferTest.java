@@ -27,7 +27,7 @@ public class OfferTest {
 
     @Test
     public void createNewDiscountOfferFromJson_Test() throws IOException {
-        String discountItemJson = "{ \"type\": \"FixedDiscount\", \"discountPercentage\": 50 }";
+        final String discountItemJson = "{ \"type\": \"FixedDiscount\", \"discountPercentage\": 50 }";
         FixedDiscount discount = mapper.readValue(discountItemJson, FixedDiscount.class);
 
         Assert.assertEquals(50, discount.getDiscountPercentage());

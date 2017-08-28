@@ -56,7 +56,7 @@ public class ItemTest {
 
     @Test
     public void createItemsFromJson() throws IOException {
-        String itemJson = "[ { \"name\": \"cheese\", \"price\": 9.99, \"offer\": { \"type\": \"FixedDiscount\", \"discountPercentage\": 50 } }, { \"name\": \"milk\", \"price\": 2.99, \"offer\": { \"type\": \"FixedDiscount\", \"discountPercentage\": 50 } } ]";
+        final String itemJson = "[ { \"name\": \"cheese\", \"price\": 9.99, \"offer\": { \"type\": \"FixedDiscount\", \"discountPercentage\": 50 } }, { \"name\": \"milk\", \"price\": 2.99, \"offer\": { \"type\": \"FixedDiscount\", \"discountPercentage\": 50 } } ]";
         List<Item> itemList = mapper.readValue(itemJson, new TypeReference<List<Item>>() {
         });
         Assert.assertTrue(itemList.size() > 1);

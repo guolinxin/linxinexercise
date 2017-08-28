@@ -2,40 +2,45 @@ package com.linxin.coding;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.linxin.coding.domain.Checkout;
 import com.linxin.coding.domain.Item;
-import com.linxin.coding.service.CheckoutService;
+import com.linxin.coding.exception.CheckoutProcessingException;
 import com.linxin.coding.service.ServiceImpl.BasicCheckout;
 import com.linxin.coding.util.ResourceLoader;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 public class CheckoutApplication {
 
     public static void main(String[] args) {
 
-        if (args.length < 1) {
-            throw new RuntimeException("No path to the input list was provided.");
-        }
+        final String itemsTest = "data/items.json";
+        final String multiBuyTest = "data/multiBuyItems.json";
 
-        String jsonString = "";
-        List<Item> itemList = Collections.emptyList();
+        // load resources fies
+        ResourceLoader resourceLoader = new ResourceLoader(itemsTest);
 
-        ResourceLoader resourceLoader = new ResourceLoader("src/main/resources/data/items.json");
+        final ObjectMapper mapper = new ObjectMapper();
+        // add jackson java 8 support
+        mapper.findAndRegisterModules();
+
+        BasicCheckout checkoutService = new BasicCheckout();
+
+        String itemsJson = null;
 
         try {
-            jsonString = resourceLoader.getResourceAsString();
+            itemsJson = resourceLoader.getResourceAsString();
 
-            ObjectMapper mapper = new ObjectMapper();
-            itemList = mapper.readValue(jsonString, new TypeReference<List<Item>>() {
+            // items from json
+            List<Item> items = mapper.readValue(itemsJson, new TypeReference<List<Item>>() {
             });
 
-        } catch (IOException e) {
+            Checkout checkout = checkoutService.getCheckout(items);
+            checkoutService.printCheckout(checkout);
+
+        } catch (IOException | CheckoutProcessingException e) {
             e.printStackTrace();
         }
-
-        CheckoutService basicCheckout = new BasicCheckout();
-
     }
 }
