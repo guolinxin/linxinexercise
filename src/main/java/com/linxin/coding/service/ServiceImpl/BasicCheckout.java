@@ -22,8 +22,10 @@ public class BasicCheckout implements CheckoutService {
     public static final String newLine = System.getProperty("line.separator");
 
     @Override
-    public String printCheckout(Checkout checkout) {
-
+    public String printCheckout(Checkout checkout) throws CheckoutProcessingException {
+        if (checkout == null) {
+            throw new CheckoutProcessingException(INVALID_ITEMS);
+        }
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append("Checkout items: ")
@@ -69,7 +71,7 @@ public class BasicCheckout implements CheckoutService {
     @Override
     public Optional<BigDecimal> getDiscountedTotalPrice(List<Item> items) throws CheckoutProcessingException {
 
-        if (items.isEmpty()) {
+        if (items == null || items.isEmpty()) {
             throw new CheckoutProcessingException(INVALID_ITEMS);
         }
 
@@ -99,7 +101,7 @@ public class BasicCheckout implements CheckoutService {
     @Override
     public Checkout getCheckout(List<Item> items) throws CheckoutProcessingException {
 
-        if (items.isEmpty()) {
+        if (items == null || items.isEmpty()) {
             throw new CheckoutProcessingException(INVALID_ITEMS);
         }
 

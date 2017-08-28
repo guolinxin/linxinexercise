@@ -88,4 +88,11 @@ public class CheckoutServiceTest {
         Checkout checkout = checkoutService.getCheckout(items);
         checkoutService.printCheckout(checkout);
     }
+
+
+    @Test(expected = CheckoutProcessingException.class)
+    public void checkoutException_Test() throws CheckoutProcessingException {
+        BasicCheckout checkoutService = new BasicCheckout();
+        checkoutService.getDiscountedTotalPrice(null);
+    }
 }

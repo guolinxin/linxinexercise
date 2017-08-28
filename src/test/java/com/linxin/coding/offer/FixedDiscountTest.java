@@ -10,4 +10,10 @@ public class FixedDiscountTest {
         FixedDiscount fixedDiscount = new FixedDiscount(30);
         Assert.assertNotNull(fixedDiscount);
     }
+
+    @Test
+    public void createFixedDiscountWithZero_Test() {
+        FixedDiscount fixedDiscount = new FixedDiscount(0);
+        Assert.assertNotNull(fixedDiscount);
+    }
 }

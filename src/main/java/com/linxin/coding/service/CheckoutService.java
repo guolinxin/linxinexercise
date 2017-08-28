@@ -16,7 +16,7 @@ public interface CheckoutService {
      * @param checkout
      * @return
      */
-    String printCheckout(Checkout checkout);
+    String printCheckout(Checkout checkout) throws CheckoutProcessingException;
 
     /**
      * Get items total price
